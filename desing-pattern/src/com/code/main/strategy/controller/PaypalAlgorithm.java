@@ -14,5 +14,4 @@ public class PaypalAlgorithm implements Payment {
 	public void pay(int amount) {
 		System.out.println("Payment via: Paypal");
 	}
-
 }
