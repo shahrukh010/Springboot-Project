@@ -2,7 +2,11 @@ package com.code.main.singleton.controller;
 
 public class MyClass extends Thread {
 
-	private static MyClass instance;
+	// Lazily singleton creation
+//	private static MyClass instance;
+
+	// Eagerly singleton creation
+	private static MyClass instance = new MyClass();
 
 	public MyClass() {
 	};
@@ -11,8 +15,9 @@ public class MyClass extends Thread {
 
 		// make our code to singleton thread safe.
 
-		if (instance == null)
-			instance = new MyClass();
+		//because of its lazily creation
+//		if (instance == null)
+//			instance = new MyClass();
 
 		return instance;
 	}
