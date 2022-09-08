@@ -96,6 +96,7 @@ public class CustomerController {
 	@GetMapping("/account_details")
 	public String viewAccountDetails(Model model, HttpServletRequest httpServletRequest) {
 
+		// get user authentication type like email or ....
 //		String principalType = httpServletRequest.getUserPrincipal().getName();
 //		System.out.println(principalType);
 		String customerMail = getEmailOfAuthenticateCustomer(httpServletRequest);
