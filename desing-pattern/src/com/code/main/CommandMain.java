@@ -38,6 +38,8 @@ public class CommandMain {
 		gameBoy.arrowDown();
 
 		GameBoy mGameBoy = new GameBoy(marioDownCommand, marioUpCommand, marioLefCommand, marioRightCommand);
+		mGameBoy.arrowUp();
+		mGameBoy.arrowDown();
 		mGameBoy.arrowLeft();
 		mGameBoy.arrowRight();
 	}
