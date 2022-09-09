@@ -101,7 +101,9 @@ public class CustomerController {
 //		System.out.println(principalType);
 		String customerMail = getEmailOfAuthenticateCustomer(httpServletRequest);
 		Customer customer = customerService.getCustomerByEmail(customerMail);
+		List<Country> listCountries = customerService.listAllCountries();
 		model.addAttribute("customer", customer);
+		model.addAttribute("listCountries", listCountries);
 		return "customer/account_form";
 
 	}
