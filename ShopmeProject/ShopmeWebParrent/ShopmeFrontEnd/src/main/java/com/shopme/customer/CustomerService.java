@@ -145,6 +145,7 @@ public class CustomerService {
 		} else {
 			customerInForm.setPassword(customerInDb.getPassword());
 		}
+		customerInForm.setVerificationCode(customerInDb.getVerificationCode());
 		customerInForm.setEnabled(customerInDb.isEnabled());
 		customerInForm.setCreatedTime(customerInDb.getCreatedTime());
 		customerInForm.setVerificationCode(customerInDb.getVerificationCode());

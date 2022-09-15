@@ -23,10 +23,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomerOAuth2UserService oAuthUserService;
 
-
 	@Autowired
 	private OAuth2LoginSuccessHandler OAuth2LoginSuccessHandler;
-	
+
 	@Autowired
 	private DatabaseLoginSuccessHandler databaseLoginHandler;
 
@@ -38,11 +37,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/account_details/**").authenticated().anyRequest().permitAll().and()
-		.formLogin()
-				.loginPage("/login").usernameParameter("email").successHandler(databaseLoginHandler).permitAll().and()
-				.logout().permitAll().and()
-				.oauth2Login().loginPage("/login").userInfoEndpoint().userService(oAuthUserService).and()
+		http.authorizeRequests().antMatchers("/account_details/", "/update_account_details").authenticated()
+				.anyRequest().permitAll().and().formLogin().loginPage("/login").usernameParameter("email")
+				.successHandler(databaseLoginHandler).permitAll().and().logout().permitAll().and().oauth2Login()
+				.loginPage("/login").userInfoEndpoint().userService(oAuthUserService).and()
 				.successHandler(OAuth2LoginSuccessHandler).and().rememberMe()
 				.key("eed5962c-7cda-404e-884a-9c60b02a492b").tokenValiditySeconds(2 * 24 * 60 * 60);
 
