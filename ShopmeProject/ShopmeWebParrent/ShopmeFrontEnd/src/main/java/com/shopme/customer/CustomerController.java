@@ -129,13 +129,30 @@ public class CustomerController {
 	}
 
 	@PostMapping("/update_account_details")
-	public String updateAccountDetails(Model model, Customer customer, RedirectAttributes redirectAttributes) {
+	public String updateAccountDetails(Model model, Customer customer, RedirectAttributes redirectAttributes,
+			HttpServletRequest httpRequest) {
 
 		customerService.update(customer);
 
 		redirectAttributes.addFlashAttribute("message", "Your account details have been update");
+		updateNameForAuthenticateCustomer(customer, httpRequest);
 
 		return "redirect:/account_details";
 	}
 
+	public void updateNameForAuthenticateCustomer(Customer customer, HttpServletRequest httpRequest) {
+
+		Object principal = httpRequest.getUserPrincipal();
+		String fullName = customer.getFirstName() + " " + customer.getLastName();
+
+		if (principal instanceof UsernamePasswordAuthenticationToken
+				|| principal instanceof RememberMeAuthenticationToken) {}
+
+		else if (principal instanceof OAuth2AuthenticationToken) {
+
+			OAuth2AuthenticationToken oauth = (OAuth2AuthenticationToken) principal;
+			CustomerOauthUser customOAuth = (CustomerOauthUser) oauth.getPrincipal();
+			customOAuth.setFullName(fullName);
+		}
+	}
 }

@@ -142,6 +142,8 @@ public class CustomerService {
 
 				customerInForm.setPassword(customerInDb.getPassword());
 			}
+		} else {
+			customerInForm.setPassword(customerInDb.getPassword());
 		}
 		customerInForm.setEnabled(customerInDb.isEnabled());
 		customerInForm.setCreatedTime(customerInDb.getCreatedTime());
