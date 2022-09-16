@@ -152,4 +152,20 @@ public class CustomerService {
 		customerInForm.setAuthenticationType(customerInDb.getAuthenticationType());
 		customerRepository.save(customerInForm);
 	}
+
+	public String updateResetPasswordToken(String email) throws CustomerNotFoundException {
+
+		Customer customer = customerRepository.findByEmail(email);
+
+		if (customer != null) {
+
+			String token = RandomString.make(30);
+			customer.setResetPasswordToken(token);
+			customerRepository.save(customer);
+			return token;
+		} else {
+			throw new CustomerNotFoundException("No account found with that email");
+		}
+	}
+
 }
