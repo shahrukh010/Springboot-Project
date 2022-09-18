@@ -57,7 +57,5 @@ public class MyTree {
 		node.addNode(5);
 
 		myTree.printNode(node);
-
 	}
-
 }
