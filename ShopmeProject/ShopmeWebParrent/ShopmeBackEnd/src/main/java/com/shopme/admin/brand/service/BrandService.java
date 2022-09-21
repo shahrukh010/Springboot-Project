@@ -34,11 +34,6 @@ public class BrandService {
 
 		return (List<Brand>) brandBepository.findAll();
 	}
-//
-//	public List<Categories> listAllCategories() {
-//
-//		return (List<Categories>) categoriesRepository.findAll();
-//	}
 
 	public Brand getById(Integer id) throws BrandNotFoundException {
 
