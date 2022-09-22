@@ -7,6 +7,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.shopme.Utility;
+import com.shopme.common.entity.Customer;
 import com.shopme.setting.EmailSettingBag;
 import com.shopme.setting.SettingService;
 
@@ -69,5 +71,23 @@ public class ResetPasswordController {
 		helper.setTo(address);
 		helper.setSubject(subject);
 		helper.setText(content, true);
+		mailSender.send(message);
 	}
+
+	@GetMapping("/reset_password")
+	public String showResetForm(@Param("token") String token, Model model) {
+
+		Customer customer = customerService.getByResetPasswordToken(token);
+
+		if (customer != null) {
+			model.addAttribute("token", token);
+
+		} else {
+			model.addAttribute("pageTitle", "invalid token");
+			model.addAttribute("message", "Invalid token");
+		}
+
+		return "customer/reset_password_form";
+	}
+
 }

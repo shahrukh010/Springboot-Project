@@ -168,4 +168,9 @@ public class CustomerService {
 		}
 	}
 
+	public Customer getByResetPasswordToken(String token) {
+
+		return customerRepository.findByResetPasswordToken(token);
+	}
+
 }
