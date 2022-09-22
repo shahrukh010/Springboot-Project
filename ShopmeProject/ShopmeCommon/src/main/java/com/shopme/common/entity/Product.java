@@ -59,6 +59,13 @@ public class Product {
 	private int reviewCount;
 	private float averageRating;
 
+	public Product() {
+	}
+
+	public Product(Integer id) {
+		this.id = id;
+	}
+
 	public int getReviewCount() {
 		return reviewCount;
 	}
