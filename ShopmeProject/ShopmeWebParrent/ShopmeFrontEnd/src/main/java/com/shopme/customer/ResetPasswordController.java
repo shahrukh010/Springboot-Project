@@ -99,6 +99,8 @@ public class ResetPasswordController {
 		try {
 
 			customerService.updatePassword(token, newPassword);
+			model.addAttribute("pageTitle", "Reset Your Password");
+			model.addAttribute("title", "Reset Your Password");
 			model.addAttribute("message", "your password is successfully updated");
 			return "message";
 		} catch (CustomerNotFoundException ex) {
