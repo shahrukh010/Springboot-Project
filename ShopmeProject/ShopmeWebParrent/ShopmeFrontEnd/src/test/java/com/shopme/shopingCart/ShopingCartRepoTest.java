@@ -1,5 +1,7 @@
 package com.shopme.shopingCart;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -44,5 +46,12 @@ public class ShopingCartRepoTest {
 		cartItem2.setQuantity(3);
 
 		cartRepo.save(cartItem2);
+	}
+
+	@Test
+	public void testCustomer() {
+
+		List<CartItem> cartItem = cartRepo.findByCustomer(new Customer(50));
+		assertThat(cartItem).size().isGreaterThan(0);
 	}
 }
