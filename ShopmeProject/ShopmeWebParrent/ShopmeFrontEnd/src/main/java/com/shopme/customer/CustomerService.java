@@ -181,6 +181,7 @@ public class CustomerService {
 			throw new CustomerNotFoundException("No Customer Found : invalid");
 
 		customer.setPassword(newPassword);
+		customer.setResetPasswordToken(null);
 		encodePassword(customer);
 		customerRepository.save(customer);
 	}
