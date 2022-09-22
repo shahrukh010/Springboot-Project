@@ -29,6 +29,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 	@Transactional
 	public void updateAuthenticationType(Integer customerId, AuthenticationType type);
 
+//	This method is called query method - meaning that Spring Data JPA understands it and generates corresponding SQL statement, something like SELECT * Customer c WHERE c.token = ?
 	public Customer findByResetPasswordToken(String token);
 
 }
