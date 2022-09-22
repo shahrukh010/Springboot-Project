@@ -59,4 +59,16 @@ public class CartItem {
 		this.quantity = quantity;
 	}
 
+	@Override
+	public String toString() {
+		return "CartItem [id=" + id + ", customer=" + customer.getFullName() + ", product=" + product.getName() + ", quantity=" + quantity
+				+ "]";
+	}
+	
+	
+	
+	
+	
+	
+
 }

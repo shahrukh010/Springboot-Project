@@ -51,7 +51,9 @@ public class ShopingCartRepoTest {
 	@Test
 	public void testCustomer() {
 
-		List<CartItem> cartItem = cartRepo.findByCustomer(new Customer(50));
+		List<CartItem> cartItem = cartRepo.findByCustomer(new Customer(1));
+
+		cartItem.forEach(System.out::println);
 		assertThat(cartItem).size().isGreaterThan(0);
 	}
 }
