@@ -173,4 +173,15 @@ public class CustomerService {
 		return customerRepository.findByResetPasswordToken(token);
 	}
 
+	public void updatePassword(String token, String newPassword) throws CustomerNotFoundException {
+
+		Customer customer = customerRepository.findByResetPasswordToken(token);
+
+		if (customer == null)
+			throw new CustomerNotFoundException("No Customer Found : invalid");
+
+		customer.setPassword(newPassword);
+		encodePassword(customer);
+		customerRepository.save(customer);
+	}
 }

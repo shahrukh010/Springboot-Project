@@ -90,4 +90,23 @@ public class ResetPasswordController {
 		return "customer/reset_password_form";
 	}
 
+	@PostMapping("/reset_password")
+	public String processResetForm(HttpServletRequest request, Model model) {
+
+		String token = request.getParameter("token");
+		String newPassword = request.getParameter("password");
+
+		try {
+
+			customerService.updatePassword(token, newPassword);
+			model.addAttribute("message", "your password is successfully updated");
+			return "message";
+		} catch (CustomerNotFoundException ex) {
+
+			model.addAttribute("pageTitle", "invalid token");
+			model.addAttribute("message", ex.getMessage());
+			return "message";
+		}
+	}
+
 }
