@@ -56,4 +56,18 @@ public class ShopingCartRepoTest {
 		cartItem.forEach(System.out::println);
 		assertThat(cartItem).size().isGreaterThan(0);
 	}
+
+	@Test
+	public void testUpdateCartItem() {
+
+		Integer customerId = 1;
+		Integer productId = 2;
+
+		cartRepo.updateQuantity(4, customerId, productId);
+
+		List<CartItem> cartItem = cartRepo.findByCustomer(new Customer(customerId));
+
+		assertThat(cartItem).size().isEqualTo(4);
+
+	}
 }
