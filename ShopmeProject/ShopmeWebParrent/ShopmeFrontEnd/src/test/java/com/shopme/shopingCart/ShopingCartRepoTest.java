@@ -70,4 +70,14 @@ public class ShopingCartRepoTest {
 		assertThat(cartItem).size().isEqualTo(4);
 
 	}
+
+	@Test
+	public void testDeleteCartItem() {
+
+		Integer customerId = 50;
+		Integer productId = 60;
+		cartRepo.deleteByCustomerAndProduct(customerId, productId);
+
+	}
+
 }
