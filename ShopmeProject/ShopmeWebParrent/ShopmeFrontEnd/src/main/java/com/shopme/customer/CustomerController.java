@@ -13,7 +13,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -102,7 +101,7 @@ public class CustomerController {
 		// get user authentication type like email or ....
 //		String principalType = httpServletRequest.getUserPrincipal().getName();
 //		System.out.println(principalType);
-		String customerMail = getEmailOfAuthenticateCustomer(httpServletRequest);
+		String customerMail = Utility.getEmailOfAuthenticateCustomer(httpServletRequest);
 		Customer customer = customerService.getCustomerByEmail(customerMail);
 		List<Country> listCountries = customerService.listAllCountries();
 		model.addAttribute("customer", customer);
@@ -111,24 +110,6 @@ public class CustomerController {
 
 	}
 
-	private String getEmailOfAuthenticateCustomer(HttpServletRequest httpRequest) {
-
-		Object principal = httpRequest.getUserPrincipal();
-		String userEmail = null;
-
-		if (principal instanceof UsernamePasswordAuthenticationToken
-				|| principal instanceof RememberMeAuthenticationToken)
-			userEmail = httpRequest.getUserPrincipal().getName();
-
-		else if (principal instanceof OAuth2AuthenticationToken) {
-
-			OAuth2AuthenticationToken oauth = (OAuth2AuthenticationToken) principal;
-			CustomerOauthUser customOAuth = (CustomerOauthUser) oauth.getPrincipal();
-			userEmail = customOAuth.getEmail();
-		}
-		return userEmail;
-
-	}
 
 	@PostMapping("/update_account_details")
 	public String updateAccountDetails(Model model, Customer customer, RedirectAttributes redirectAttributes,
