@@ -43,7 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginPage("/login").userInfoEndpoint().userService(oAuthUserService).and()
 				.successHandler(OAuth2LoginSuccessHandler).and().rememberMe()
 				.key("eed5962c-7cda-404e-884a-9c60b02a492b").tokenValiditySeconds(2 * 24 * 60 * 60);
-
 	}
 
 	@Bean
