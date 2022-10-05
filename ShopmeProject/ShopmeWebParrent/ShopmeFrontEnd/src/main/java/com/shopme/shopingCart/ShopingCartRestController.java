@@ -26,6 +26,7 @@ public class ShopingCartRestController {
 
 		try {
 			Customer customer = getAuthenticateCustomer(request);
+			// if customer is already login then add product into cart
 			Integer updateQuantity = shopingCartService.addProduct(productId, quantity, customer);
 
 			return updateQuantity + " item(s) of this product were added to your shoping cart";
