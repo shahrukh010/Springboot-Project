@@ -26,7 +26,6 @@ public class ShopingCartRestController {
 
 		try {
 			Customer customer = getAuthenticateCustomer(request);
-			// if customer is already login then add product into cart
 			Integer updateQuantity = shopingCartService.addProduct(productId, quantity, customer);
 
 			return updateQuantity + " item(s) of this product were added to your shoping cart";
@@ -34,7 +33,6 @@ public class ShopingCartRestController {
 		} catch (CustomerNotFoundException ex) {
 			return "You must login to add this product into cart";
 		}
-
 	}
 
 	private Customer getAuthenticateCustomer(HttpServletRequest request) throws CustomerNotFoundException {

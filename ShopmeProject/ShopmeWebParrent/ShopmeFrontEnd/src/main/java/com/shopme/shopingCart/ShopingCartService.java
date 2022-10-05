@@ -31,7 +31,6 @@ public class ShopingCartService {
 		}
 		cartItem.setQuantity(updateQuantity);
 		cartRepo.save(cartItem);
-
 		return updateQuantity;
 	}
 
