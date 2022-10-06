@@ -13,7 +13,7 @@ public class ShopingCartService {
 	@Autowired
 	private CartItemRepository cartRepo;
 
-	public Integer addProduct(Integer productId, Integer quantity, Customer customer) {
+	public Integer addProduct(Integer productId, Integer quantity, Customer customer) throws ShopingCartException {
 
 		Integer updateQuantity = quantity;
 
@@ -23,6 +23,11 @@ public class ShopingCartService {
 		if (cartItem != null) {
 
 			updateQuantity = cartItem.getQuantity() + updateQuantity;
+			if(updateQuantity > 5) {
+				
+				throw new ShopingCartException("Could not add more "+quantity+" item(s)"+
+				"because there's already "+cartItem.getQuantity()+" item(s) "+"in your shoping cart.Maximum allowed only 5.");
+			}
 			cartItem.setQuantity(updateQuantity);
 		} else {
 			cartItem = new CartItem();
